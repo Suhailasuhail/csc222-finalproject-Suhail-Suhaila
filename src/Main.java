@@ -1,7 +1,14 @@
+import java.util.ArrayList;
+import java.util.Scanner;
 public class Main {
 
-    public static void main(String[] args){
+    //Main method
+    public static void main(String[] args) {
 
+        //Creates a Scanner
+        Scanner input = new Scanner(System.in);
+
+//Creates a Volunteer object
         Volunteer volunteer = new Volunteer(
 
                 101,
@@ -9,7 +16,7 @@ public class Main {
                 "Alinaji@gmail.com",
                 "540-335-9876",
                 4);
-
+//Creates a Leadership object
         Leadership leader = new Leadership(
                 102,
                 "Marwa Mohammadi",
@@ -17,9 +24,15 @@ public class Main {
                 "540-555-5678",
                 "President");
 
+        ArrayList<Member> members = new ArrayList<>();
+        members.add(volunteer);
+        members.add(leader);
 
-        volunteer.displayInfo();
-        System.out.println();
-        leader.displayInfo();
+        for (Member member : members) {
+            member.displayInfo();
+            System.out.println();
+        }
+
+        input.close();
     }
 }

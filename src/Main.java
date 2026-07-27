@@ -26,7 +26,9 @@ public class Main {
         System.out.println("1. Add Volunteer");
         System.out.println("2. Add Leadership Member");
         System.out.println("3. View All Members");
-        System.out.println("4. Exit");
+        System.out.println("4. Search Member By ID");
+        System.out.println("5. Export Member to CSV");
+        System.out.println("6. Exit");
         System.out.print("Enter your choice: ");
 
         choice = input.nextInt();
@@ -84,29 +86,57 @@ public class Main {
             System.out.println("All Members:");
             System.out.println();
 
-            for (Member member : members) {
-                member.displayInfo();
-                System.out.println();
+            if (members.isEmpty()) {
+                System.out.println("No members found");
+            } else {
+                for (Member member : members) {
+                    member.displayInfo();
+                    System.out.println();
+                }
             }
         }
 
-        // Ends the program
+        // Search by ID
         else if (choice == 4) {
 
-            System.out.println("Program ended.");
+            System.out.println("Enter Member ID to search.");
+            int searchId = input.nextInt();
+            input.nextLine();
+
+            boolean found = false;
+            for (Member member : members) {
+                if (member.getMemberId() == searchId) {
+                    System.out.println();
+                    System.out.println("Member found.");
+                    member.displayInfo();
+                    found = true;
+                }
+            }
+            if (!found) {
+                System.out.println("Member not found.");
+            }
         }
+
+        //Export all members to CSV file
+            else if (choice == 5){
+                CSVHelper.exportToCSV(members);
+            }
+
+            //ends the program
+            else if (choice == 6){
+                System.out.println("Program ended.");
+            }
 
         // Invalid menu option
         else {
 
             System.out.println("Invalid choice. Please try again.");
-
         }
 
-        } while (choice != 4);
+        } while (choice != 6);
 
         // Closes the Scanner
         input.close();
 
-    }
-}
+    }//ends main method
+}//ends Main class
